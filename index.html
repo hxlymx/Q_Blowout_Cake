@@ -520,7 +520,17 @@
                     this.vy = (Math.random() - 0.5) * 4 - 5; // Upwards pop
                     this.life = 200;
                     this.decay = 0.5;
-                    this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                    // Glittery Purple & Gold range only
+const confettiPalette = [
+    'rgba(186, 85, 211, 0.9)',   // Medium Purple
+    'rgba(147, 112, 219, 0.9)', // Purple
+    'rgba(255, 215, 0, 0.95)',  // Gold
+    'rgba(238, 201, 0, 0.95)',  // Dark Gold
+    'rgba(255, 255, 224, 0.95)',// Light Gold shimmer
+];
+
+// Random glitter shade
+this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)];
                     this.gravity = 0.15;
                     this.rotation = Math.random() * 360;
                     this.rotationSpeed = (Math.random() - 0.5) * 10;
