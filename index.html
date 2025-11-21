@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Birthday AQ!</title>
+    <style>
+        /* --- RESET & LAYOUT --- */
+        body {
+            background: radial-gradient(circle at center, #2b1a14 0%, #0f0805 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        /* --- TEXT STYLES --- */
+        .title {
+            position: absolute;
+            top: 5%;
+            font-size: clamp(24px, 5vw, 40px);
+            text-align: center;
+            font-weight: 800;
+            background: linear-gradient(to right, #d4af37, #fdf5c4, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            z-index: 20;
+        }
+
+        .instructions {
+            margin-top: 20px;
+            color: #a0a0a0;
+            font-size: 14px;
+            animation: pulse 2s infinite;
+        }
+
+        /* --- THE 3D CAKE --- */
+        .cake-container {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-end;
+            margin-top: 50px;
+        }
+
+        /* General Tier Styling (Cylindrical look) */
+        .tier {
+            position: relative;
+            background: linear-gradient(to right, #4e2c1d, #7b4a36 40%, #9e634d 50%, #7b4a36 60%, #4e2c1d);
+            border-radius: 50% / 10%; /* Elliptical shading */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.6);
+        }
+
+        /* Tier Tops (The "Lid" of the cylinder) */
+        .tier::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 20px; /* The "open" part of the cylinder */
+            background: #663825;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+            z-index: 2;
+        }
+
+        /* Bottom Tier */
+        .tier.bottom {
+            width: 260px;
+            height: 80px;
+            z-index: 1;
+        }
+
+        /* Middle Tier */
+        .tier.middle {
+            width: 200px;
+            height: 70px;
+            z-index: 3;
+            margin-bottom: -10px; /* Stack overlap */
+        }
+
+        /* Top Tier */
+        .tier.top {
+            width: 140px;
+            height: 60px;
+            z-index: 5;
+            margin-bottom: -10px; /* Stack overlap */
+        }
+
+        /* --- ICING DRIPS --- */
+        /* We use a repeating gradient on a pseudo-element to create drips */
+        .icing-drips {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 40px; /* Length of drips */
+            z-index: 3;
+            border-radius: 50% / 20%;
+            /* Complex gradient to simulate dripping chocolate */
+            background: 
+                radial-gradient(circle at 10% 100%, #3e2013 8px, transparent 9px),
+                radial-gradient(circle at 30% 110%, #3e2013 12px, transparent 13px),
+                radial-gradient(circle at 50% 100%, #3e2013 10px, transparent 11px),
+                radial-gradient(circle at 70% 115%, #3e2013 14px, transparent 15px),
+                radial-gradient(circle at 90% 100%, #3e2013 8px, transparent 9px);
+            background-repeat: no-repeat;
+            transform: translateY(-40%);
+            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
+        }
+        
+        /* Icing Top Cover */
+        .icing-top {
+            position: absolute;
+            top: -10px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: #3e2013; /* Dark Chocolate icing */
+            border-radius: 50%;
+            z-index: 4;
+        }
+
+        /* --- SPRINKLES --- */
+        /* Randomly placed colored dots using box-shadow */
+        .sprinkles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50% / 10%;
+            z-index: 4;
+            overflow: hidden;
+            opacity: 0.8;
+        }
+        
+        /* We use a pseudo-element to scatter shadows */
+        .sprinkles::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            box-shadow: 
+                20px 10px 0 #ff0000, 40px 5px 0 #00ff00, 60px 15px 0 #0000ff,
+                80px 8px 0 #ffff00, 100px 12px 0 #ff00ff, 120px 4px 0 #00ffff,
+                30px 20px 0 #ff0000, 50px 25px 0 #00ff00, 70px 22px 0 #0000ff,
+                90px 18px 0 #ffff00, 110px 28px 0 #ff00ff, 130px 24px 0 #00ffff;
+            animation: rotateSprinkles 20s linear infinite;
+        }
+
+        /* --- GOLDEN AQ CANDLES --- */
+        .candles-container {
+            position: absolute;
+            top: -55px; /* Sit on top of top tier */
+            z-index: 10;
+            display: flex;
+            gap: 15px;
+        }
+
+        .candle-letter {
+            position: relative;
+            font-size: 50px;
+            font-weight: 900;
+            /* Gold Glitter Gradient */
+            background: radial-gradient(ellipse at center, #fcf6ba 0%, #bf953f 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 0px rgba(139, 101, 8, 0.8));
+            animation: glitter 3s ease infinite;
+        }
+
+        /* Sticks for candles */
+        .candle-letter::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 15px;
+            background: white;
+            z-index: -1;
+            border-radius: 2px;
+        }
+
+        /* --- PURPLE FLAMES --- */
+        .flame {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%) scale(1);
+            width: 16px;
+            height: 24px;
+            background: radial-gradient(circle at 50% 80%, #dcbaf7, #9a4ecc 40%, #5e1e85 100%);
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            box-shadow: 0 0 10px 2px rgba(154, 78, 204, 0.6), 0 -5px 15px rgba(154, 78, 204, 0.4);
+            filter: blur(0.5px);
+            animation: flicker 0.1s infinite alternate;
+            transform-origin: center bottom;
+            transition: opacity 0.5s, transform 0.5s;
+        }
+
+        /* Wick */
+        .flame::before {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 6px;
+            background: black;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes glitter {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes flicker {
+            0% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 1; }
+            25% { transform: translateX(-50%) scale(1.1, 0.9) skewX(-2deg); opacity: 0.9; }
+            50% { transform: translateX(-50%) scale(0.9, 1.1) skewX(2deg); opacity: 1; }
+            75% { transform: translateX(-50%) scale(1.05, 0.95) skewX(-1deg); opacity: 0.9; }
+            100% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        /* --- UI ELEMENTS --- */
+        #startBtn {
+            margin-top: 30px;
+            padding: 12px 30px;
+            font-size: 18px;
+            font-weight: bold;
+            color: #4e2c1d;
+            background: linear-gradient(to bottom, #ffd700, #daa520);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+            transition: transform 0.2s;
+            z-index: 100;
+        }
+
+        #startBtn:active {
+            transform: scale(0.95);
+        }
+
+        /* Message Pop */
+        #message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0);
+            text-align: center;
+            z-index: 100;
+            pointer-events: none;
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+        }
+
+        #message.show {
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        #message h2 {
+            font-size: 50px;
+            margin: 0;
+            background: linear-gradient(to right, #ff69b4, #ff1493);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 0 white);
+        }
+        
+        #message p {
+            font-size: 20px;
+            margin-top: 10px;
+        }
+
+        /* --- CANVAS --- */
+        #fxCanvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 50; /* Above cake */
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- EFFECTS CANVAS -->
+    <canvas id="fxCanvas"></canvas>
+
+    <div class="container">
+        <h1 class="title">Happy Birthday Fine Boy Que!!!</h1>
+
+        <!-- CAKE -->
+        <div class="cake-container">
+            
+            <!-- CANDLES (Sitting on top) -->
+            <div class="candles-container">
+                <div class="candle-letter">
+                    A
+                    <div class="flame" id="flame1"></div>
+                </div>
+                <div class="candle-letter">
+                    Q
+                    <div class="flame" id="flame2"></div>
+                </div>
+            </div>
+
+            <!-- TOP TIER -->
+            <div class="tier top">
+                <div class="icing-top"></div>
+                <div class="icing-drips"></div>
+                <div class="sprinkles"></div>
+            </div>
+
+            <!-- MIDDLE TIER -->
+            <div class="tier middle">
+                <div class="icing-top"></div>
+                <div class="icing-drips"></div>
+                <div class="sprinkles"></div>
+            </div>
+
+            <!-- BOTTOM TIER -->
+            <div class="tier bottom">
+                <div class="icing-top"></div>
+                <div class="icing-drips"></div>
+            </div>
+        </div>
+
+        <p class="instructions" id="statusText">Press button to light candles</p>
+        <button id="startBtn">Light Candles & Enable Mic</button>
+
+        <!-- POPUP MESSAGE -->
+        <div id="message">
+            <h2>HOORAY!</h2>
+            <p>Wishing you the sweetest birthday ever!!! <3</p>
+        </div>
+    </div>
+
+    <script>
+        // --- CONFIGURATION ---
+        const BLOW_THRESHOLD = 60; // Sensitivity
+        const FLAMES = document.querySelectorAll('.flame');
+        const START_BTN = document.getElementById('startBtn');
+        const STATUS_TEXT = document.getElementById('statusText');
+        const MESSAGE = document.getElementById('message');
+        
+        // --- AUDIO VARS ---
+        let audioContext;
+        let analyser;
+        let dataArray;
+        let isListening = false;
+        let candlesOut = false;
+
+        // --- CANVAS VARS (Confetti & Sparklers) ---
+        const canvas = document.getElementById('fxCanvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        let animationId;
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // --- INITIALIZATION ---
+        // Start with flames hidden
+        FLAMES.forEach(f => f.style.opacity = '0');
+
+        START_BTN.addEventListener('click', async () => {
+            try {
+                // 1. Initialize Audio
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                analyser = audioContext.createAnalyser();
+                analyser.fftSize = 256;
+                const source = audioContext.createMediaStreamSource(stream);
+                source.connect(analyser);
+                dataArray = new Uint8Array(analyser.frequencyBinCount);
+
+                // 2. UI Updates
+                START_BTN.style.display = 'none';
+                STATUS_TEXT.textContent = "Blow into your microphone to make a wish!";
+                
+                // 3. Light Candles
+                FLAMES.forEach(f => {
+                    f.style.opacity = '1';
+                    f.style.transform = 'translateX(-50%) scale(1)';
+                });
+
+                isListening = true;
+                loop(); // Start Audio & Particle Loop
+
+            } catch (err) {
+                alert("Microphone access denied. Tap the cake to blow out!");
+                // Fallback to click
+                document.querySelector('.cake-container').addEventListener('click', blowOut);
+                START_BTN.style.display = 'none';
+                STATUS_TEXT.textContent = "Tap the cake to make a wish!";
+                FLAMES.forEach(f => f.style.opacity = '1');
+            }
+        });
+
+        // --- MAIN LOOP ---
+        function loop() {
+            // 1. Audio Detection
+            if (isListening && !candlesOut) {
+                analyser.getByteFrequencyData(dataArray);
+                let sum = 0;
+                // Focus on lower frequencies for "blowing" sound
+                for (let i = 0; i < dataArray.length / 2; i++) {
+                    sum += dataArray[i];
+                }
+                const average = sum / (dataArray.length / 2);
+
+                if (average > BLOW_THRESHOLD) {
+                    blowOut();
+                }
+            }
+
+            // 2. Render Particles (Sparklers/Confetti)
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            if (particles.length > 0) {
+                particles.forEach((p, index) => {
+                    p.update();
+                    p.draw();
+                    if (p.life <= 0) {
+                        particles.splice(index, 1);
+                    }
+                });
+            }
+
+            requestAnimationFrame(loop);
+        }
+
+        // --- ACTIONS ---
+        function blowOut() {
+            if (candlesOut) return;
+            candlesOut = true;
+            isListening = false;
+
+            // Extinguish Flames
+            FLAMES.forEach(f => {
+                f.style.opacity = '0';
+                f.style.transform = 'translateX(-50%) scale(0.5)';
+            });
+
+            STATUS_TEXT.style.opacity = '0';
+
+            // Trigger Celebration
+            setTimeout(() => {
+                MESSAGE.classList.add('show');
+                createSparklers(); // Trigger sparklers
+                createConfetti();  // Trigger confetti
+            }, 200);
+        }
+
+        // --- PARTICLE SYSTEMS ---
+
+        class Spark {
+            constructor(x, y, type) {
+                this.x = x;
+                this.y = y;
+                this.type = type; // 'sparkler' or 'confetti'
+                
+                if (type === 'sparkler') {
+                    const angle = Math.random() * Math.PI * 2;
+                    const speed = Math.random() * 4 + 2;
+                    this.vx = Math.cos(angle) * speed;
+                    this.vy = Math.sin(angle) * speed;
+                    this.life = 100;
+                    this.decay = Math.random() * 2 + 1;
+                    this.color = `hsl(${Math.random() * 40 + 30}, 100%, 70%)`; // Gold/Orange
+                    this.gravity = 0.1;
+                } else {
+                    // Confetti
+                    this.vx = (Math.random() - 0.5) * 4;
+                    this.vy = (Math.random() - 0.5) * 4 - 5; // Upwards pop
+                    this.life = 200;
+                    this.decay = 0.5;
+                    this.color = `hsl(${Math.random() * 360}, 100%, 60%)`;
+                    this.gravity = 0.15;
+                    this.rotation = Math.random() * 360;
+                    this.rotationSpeed = (Math.random() - 0.5) * 10;
+                }
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+                this.vy += this.gravity; // Gravity
+                this.life -= this.decay;
+
+                if (this.type === 'confetti') {
+                    this.rotation += this.rotationSpeed;
+                    this.vx *= 0.99; // Air drag
+                }
+            }
+
+            draw() {
+                ctx.save();
+                ctx.translate(this.x, this.y);
+                
+                if (this.type === 'sparkler') {
+                    ctx.globalAlpha = this.life / 100;
+                    ctx.fillStyle = this.color;
+                    ctx.beginPath();
+                    ctx.arc(0, 0, 2, 0, Math.PI * 2);
+                    ctx.fill();
+                } else {
+                    // Confetti piece
+                    ctx.globalAlpha = Math.min(1, this.life / 100);
+                    ctx.rotate(this.rotation * Math.PI / 180);
+                    ctx.fillStyle = this.color;
+                    ctx.fillRect(-4, -2, 8, 4);
+                }
+                
+                ctx.restore();
+            }
+        }
+
+        function createSparklers() {
+            // Find candle positions to emit sparklers from
+            const candleRect = document.querySelector('.candles-container').getBoundingClientRect();
+            const originX = candleRect.left + candleRect.width / 2;
+            const originY = candleRect.top + candleRect.height / 2;
+
+            // Burst loop
+            let bursts = 0;
+            const burstInterval = setInterval(() => {
+                for (let i = 0; i < 20; i++) {
+                    particles.push(new Spark(originX, originY, 'sparkler'));
+                }
+                bursts++;
+                if (bursts > 10) clearInterval(burstInterval);
+            }, 100);
+        }
+
+        function createConfetti() {
+            // Burst from center
+            for (let i = 0; i < 100; i++) {
+                particles.push(new Spark(window.innerWidth / 2, window.innerHeight / 2, 'confetti'));
+            }
+            // Rain from top
+            let rainDuration = 0;
+            const rainInterval = setInterval(() => {
+                particles.push(new Spark(Math.random() * window.innerWidth, -10, 'confetti'));
+                rainDuration++;
+                if (rainDuration > 50) clearInterval(rainInterval);
+            }, 50);
+        }
+
+    </script>
+</body>
+</html>
