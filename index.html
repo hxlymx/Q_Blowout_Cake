@@ -378,7 +378,7 @@
 
     <script>
         // --- CONFIGURATION ---
-        const BLOW_THRESHOLD = 60; // Sensitivity
+        const BLOW_THRESHOLD = 30; // More Sensitive
         const FLAMES = document.querySelectorAll('.flame');
         const START_BTN = document.getElementById('startBtn');
         const STATUS_TEXT = document.getElementById('statusText');
@@ -448,13 +448,14 @@
             if (isListening && !candlesOut) {
                 analyser.getByteFrequencyData(dataArray);
                 let sum = 0;
-                // Focus on lower frequencies for "blowing" sound
-                for (let i = 0; i < dataArray.length / 2; i++) {
+                // Use stronger low-frequency detection for blowing sound
+                for (let i = 0; i < dataArray.length; i++) {
                     sum += dataArray[i];
                 }
-                const average = sum / (dataArray.length / 2);
+                const average = sum / dataArray.length;
 
-                if (average > BLOW_THRESHOLD) {
+                // Debug: console.log(average);  // You can enable this if testing
+                if (average > BLOW_THRESHOLD && !candlesOut) {
                     blowOut();
                 }
             }
