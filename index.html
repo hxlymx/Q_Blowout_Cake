@@ -1,9 +1,11 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Happy Birthday Fine Boy Que!!!</title>
+    <title>Happy Birthday AQ!</title>
     <style>
         /* --- RESET & LAYOUT --- */
         body {
@@ -41,7 +43,7 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            z-index: 20;
+            z-index: 10;
         }
 
         .instructions {
@@ -67,18 +69,18 @@
         .tier {
             position: relative;
             background: linear-gradient(to right, #4e2c1d, #7b4a36 40%, #9e634d 50%, #7b4a36 60%, #4e2c1d);
-            border-radius: 50% / 10%; /* Elliptical shading */
+            border-radius: 50% / 10%;
             box-shadow: 0 10px 20px rgba(0,0,0,0.6);
         }
 
-        /* Tier Tops (The "Lid" of the cylinder) */
+        /* Tier Tops (The "Lid") */
         .tier::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 20px; /* The "open" part of the cylinder */
+            height: 20px;
             background: #663825;
             border-radius: 50%;
             transform: translateY(-50%);
@@ -98,7 +100,7 @@
             width: 200px;
             height: 70px;
             z-index: 3;
-            margin-bottom: -10px; /* Stack overlap */
+            margin-bottom: -10px;
         }
 
         /* Top Tier */
@@ -106,20 +108,20 @@
             width: 140px;
             height: 60px;
             z-index: 5;
-            margin-bottom: -10px; /* Stack overlap */
+            margin-bottom: -10px;
+            display: flex;
+            justify-content: center;
         }
 
         /* --- ICING DRIPS --- */
-        /* We use a repeating gradient on a pseudo-element to create drips */
         .icing-drips {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 40px; /* Length of drips */
+            height: 40px;
             z-index: 3;
             border-radius: 50% / 20%;
-            /* Complex gradient to simulate dripping chocolate */
             background: 
                 radial-gradient(circle at 10% 100%, #3e2013 8px, transparent 9px),
                 radial-gradient(circle at 30% 110%, #3e2013 12px, transparent 13px),
@@ -131,20 +133,18 @@
             filter: drop-shadow(0 2px 2px rgba(0,0,0,0.3));
         }
         
-        /* Icing Top Cover */
         .icing-top {
             position: absolute;
             top: -10px;
             left: 0;
             width: 100%;
             height: 20px;
-            background: #3e2013; /* Dark Chocolate icing */
+            background: #3e2013;
             border-radius: 50%;
             z-index: 4;
         }
 
         /* --- SPRINKLES --- */
-        /* Randomly placed colored dots using box-shadow */
         .sprinkles {
             position: absolute;
             top: 0;
@@ -157,7 +157,6 @@
             opacity: 0.8;
         }
         
-        /* We use a pseudo-element to scatter shadows */
         .sprinkles::after {
             content: '';
             position: absolute;
@@ -166,19 +165,22 @@
             width: 4px;
             height: 4px;
             border-radius: 50%;
+            /* Updated to browns and gold */
             box-shadow: 
-                20px 10px 0 #ff0000, 40px 5px 0 #00ff00, 60px 15px 0 #0000ff,
-                80px 8px 0 #ffff00, 100px 12px 0 #ff00ff, 120px 4px 0 #00ffff,
-                30px 20px 0 #ff0000, 50px 25px 0 #00ff00, 70px 22px 0 #0000ff,
-                90px 18px 0 #ffff00, 110px 28px 0 #ff00ff, 130px 24px 0 #00ffff;
+                20px 10px 0 #8B4513, 40px 5px 0 #D2691E, 60px 15px 0 #FFD700,
+                80px 8px 0 #A0522D, 100px 12px 0 #DAA520, 120px 4px 0 #CD853F,
+                30px 20px 0 #8B4513, 50px 25px 0 #D2691E, 70px 22px 0 #FFD700,
+                90px 18px 0 #A0522D, 110px 28px 0 #DAA520, 130px 24px 0 #CD853F;
             animation: rotateSprinkles 20s linear infinite;
         }
 
         /* --- GOLDEN AQ CANDLES --- */
         .candles-container {
             position: absolute;
-            top: -55px; /* Sit on top of top tier */
-            z-index: 10;
+            bottom: 35px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
             display: flex;
             gap: 15px;
         }
@@ -187,7 +189,6 @@
             position: relative;
             font-size: 50px;
             font-weight: 900;
-            /* Gold Glitter Gradient */
             background: radial-gradient(ellipse at center, #fcf6ba 0%, #bf953f 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
@@ -225,9 +226,9 @@
             animation: flicker 0.1s infinite alternate;
             transform-origin: center bottom;
             transition: opacity 0.5s, transform 0.5s;
+            opacity: 0; /* Start hidden */
         }
 
-        /* Wick */
         .flame::before {
             content: '';
             position: absolute;
@@ -279,7 +280,6 @@
             transform: scale(0.95);
         }
 
-        /* Message Pop */
         #message {
             position: absolute;
             top: 50%;
@@ -289,6 +289,7 @@
             z-index: 100;
             pointer-events: none;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.27);
+            width: 100%;
         }
 
         #message.show {
@@ -298,10 +299,11 @@
         #message h2 {
             font-size: 50px;
             margin: 0;
-            background: linear-gradient(to right, #ff69b4, #ff1493);
+            /* Updated to metallic purple */
+            background: linear-gradient(to right, #E0B0FF, #DA70D6, #9932CC, #800080);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0 2px 0 white);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3), -1px -1px 0px rgba(255,255,255,0.2);
         }
         
         #message p {
@@ -317,36 +319,32 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 50; /* Above cake */
+            z-index: 50;
         }
 
     </style>
 </head>
 <body>
 
-    <!-- EFFECTS CANVAS -->
     <canvas id="fxCanvas"></canvas>
 
     <div class="container">
         <h1 class="title">Happy Birthday Fine Boy Que!!!</h1>
 
-        <!-- CAKE -->
         <div class="cake-container">
             
-            <!-- CANDLES (Sitting on top) -->
-            <div class="candles-container">
-                <div class="candle-letter">
-                    A
-                    <div class="flame" id="flame1"></div>
-                </div>
-                <div class="candle-letter">
-                    Q
-                    <div class="flame" id="flame2"></div>
-                </div>
-            </div>
-
             <!-- TOP TIER -->
             <div class="tier top">
+                <div class="candles-container">
+                    <div class="candle-letter">
+                        A
+                        <div class="flame" id="flame1"></div>
+                    </div>
+                    <div class="candle-letter">
+                        Q
+                        <div class="flame" id="flame2"></div>
+                    </div>
+                </div>
                 <div class="icing-top"></div>
                 <div class="icing-drips"></div>
                 <div class="sprinkles"></div>
@@ -369,33 +367,26 @@
         <p class="instructions" id="statusText">Press button to light candles</p>
         <button id="startBtn">Light Candles & Enable Mic</button>
 
-        <!-- POPUP MESSAGE -->
         <div id="message">
-            <h2>MORE LIFE, MORE BLESSINGS, MORE MONEY, & TING!</h2>
-            <p>Wishing you the sweetest birthday ever!!! <3</p>
+            <h2> Wishing you the sweetest birthday ever!!! <3 </h2>
         </div>
     </div>
 
     <script>
         // --- CONFIGURATION ---
-        const BLOW_THRESHOLD = 30; // More Sensitive
+        const BLOW_THRESHOLD = 60; 
         const FLAMES = document.querySelectorAll('.flame');
         const START_BTN = document.getElementById('startBtn');
         const STATUS_TEXT = document.getElementById('statusText');
         const MESSAGE = document.getElementById('message');
         
-        // --- AUDIO VARS ---
-        let audioContext;
-        let analyser;
-        let dataArray;
+        let audioContext, analyser, dataArray;
         let isListening = false;
         let candlesOut = false;
 
-        // --- CANVAS VARS (Confetti & Sparklers) ---
         const canvas = document.getElementById('fxCanvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        let animationId;
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -404,13 +395,8 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
-        // --- INITIALIZATION ---
-        // Start with flames hidden
-        FLAMES.forEach(f => f.style.opacity = '0');
-
         START_BTN.addEventListener('click', async () => {
             try {
-                // 1. Initialize Audio
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                 audioContext = new (window.AudioContext || window.webkitAudioContext)();
                 analyser = audioContext.createAnalyser();
@@ -419,22 +405,19 @@
                 source.connect(analyser);
                 dataArray = new Uint8Array(analyser.frequencyBinCount);
 
-                // 2. UI Updates
                 START_BTN.style.display = 'none';
                 STATUS_TEXT.textContent = "Blow into your microphone to make a wish!";
                 
-                // 3. Light Candles
                 FLAMES.forEach(f => {
                     f.style.opacity = '1';
                     f.style.transform = 'translateX(-50%) scale(1)';
                 });
 
                 isListening = true;
-                loop(); // Start Audio & Particle Loop
+                loop();
 
             } catch (err) {
                 alert("Microphone access denied. Tap the cake to blow out!");
-                // Fallback to click
                 document.querySelector('.cake-container').addEventListener('click', blowOut);
                 START_BTN.style.display = 'none';
                 STATUS_TEXT.textContent = "Tap the cake to make a wish!";
@@ -442,41 +425,29 @@
             }
         });
 
-        // --- MAIN LOOP ---
         function loop() {
-            // 1. Audio Detection
             if (isListening && !candlesOut) {
                 analyser.getByteFrequencyData(dataArray);
                 let sum = 0;
-                // Use stronger low-frequency detection for blowing sound
-                for (let i = 0; i < dataArray.length; i++) {
+                for (let i = 0; i < dataArray.length / 2; i++) {
                     sum += dataArray[i];
                 }
-                const average = sum / dataArray.length;
-
-                // Debug: console.log(average);  // You can enable this if testing
-                if (average > BLOW_THRESHOLD && !candlesOut) {
-                    blowOut();
-                }
+                const average = sum / (dataArray.length / 2);
+                if (average > BLOW_THRESHOLD) blowOut();
             }
 
-            // 2. Render Particles (Sparklers/Confetti)
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
             if (particles.length > 0) {
                 particles.forEach((p, index) => {
                     p.update();
                     p.draw();
-                    if (p.life <= 0) {
-                        particles.splice(index, 1);
-                    }
+                    if (p.life <= 0) particles.splice(index, 1);
                 });
             }
-
             requestAnimationFrame(loop);
         }
 
-        // --- ACTIONS ---
         function blowOut() {
             if (candlesOut) return;
             candlesOut = true;
@@ -490,21 +461,18 @@
 
             STATUS_TEXT.style.opacity = '0';
 
-            // Trigger Celebration
             setTimeout(() => {
                 MESSAGE.classList.add('show');
-                createSparklers(); // Trigger sparklers
-                createConfetti();  // Trigger confetti
+                createSparklers(); 
+                createConfetti();  
             }, 200);
         }
-
-        // --- PARTICLE SYSTEMS ---
 
         class Spark {
             constructor(x, y, type) {
                 this.x = x;
                 this.y = y;
-                this.type = type; // 'sparkler' or 'confetti'
+                this.type = type; 
                 
                 if (type === 'sparkler') {
                     const angle = Math.random() * Math.PI * 2;
@@ -513,25 +481,25 @@
                     this.vy = Math.sin(angle) * speed;
                     this.life = 100;
                     this.decay = Math.random() * 2 + 1;
-                    this.color = `hsl(${Math.random() * 40 + 30}, 100%, 70%)`; // Gold/Orange
+                    this.color = `hsl(${Math.random() * 40 + 30}, 100%, 70%)`; 
                     this.gravity = 0.1;
                 } else {
                     // Confetti
                     this.vx = (Math.random() - 0.5) * 4;
-                    this.vy = (Math.random() - 0.5) * 4 - 5; // Upwards pop
+                    this.vy = (Math.random() - 0.5) * 4 - 5; 
                     this.life = 200;
                     this.decay = 0.5;
-                    // Glittery Purple & Gold range only
-const confettiPalette = [
-    'rgba(186, 85, 211, 0.9)',   // Medium Purple
-    'rgba(147, 112, 219, 0.9)', // Purple
-    'rgba(255, 215, 0, 0.95)',  // Gold
-    'rgba(238, 201, 0, 0.95)',  // Dark Gold
-    'rgba(255, 255, 224, 0.95)',// Light Gold shimmer
-];
 
-// Random glitter shade
-this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)];
+                    // New Confetti Colors: Purple, Yellow, Glittery Gold
+                    const colors = [
+                        '#800080', // Purple
+                        '#FFD700', // Gold
+                        '#FFFF00'  // Yellow
+                    ];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                    // Add a property for gold glitter effect
+                    this.isGold = this.color === '#FFD700';
+                    
                     this.gravity = 0.15;
                     this.rotation = Math.random() * 360;
                     this.rotationSpeed = (Math.random() - 0.5) * 10;
@@ -541,12 +509,12 @@ this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)]
             update() {
                 this.x += this.vx;
                 this.y += this.vy;
-                this.vy += this.gravity; // Gravity
+                this.vy += this.gravity; 
                 this.life -= this.decay;
 
                 if (this.type === 'confetti') {
                     this.rotation += this.rotationSpeed;
-                    this.vx *= 0.99; // Air drag
+                    this.vx *= 0.99; 
                 }
             }
 
@@ -564,8 +532,21 @@ this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)]
                     // Confetti piece
                     ctx.globalAlpha = Math.min(1, this.life / 100);
                     ctx.rotate(this.rotation * Math.PI / 180);
+                    
+                    // Draw confetti piece
                     ctx.fillStyle = this.color;
                     ctx.fillRect(-4, -2, 8, 4);
+
+                    // Add glitter effect for gold confetti
+                    if (this.isGold) {
+                        ctx.fillStyle = 'rgba(255, 255, 255, 0.8)';
+                        const flicker = Math.random() > 0.8;
+                        if (flicker) {
+                             ctx.beginPath();
+                             ctx.arc(Math.random()*8 - 4, Math.random()*4 - 2, 1, 0, Math.PI*2);
+                             ctx.fill();
+                        }
+                    }
                 }
                 
                 ctx.restore();
@@ -573,12 +554,10 @@ this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)]
         }
 
         function createSparklers() {
-            // Find candle positions to emit sparklers from
             const candleRect = document.querySelector('.candles-container').getBoundingClientRect();
             const originX = candleRect.left + candleRect.width / 2;
             const originY = candleRect.top + candleRect.height / 2;
 
-            // Burst loop
             let bursts = 0;
             const burstInterval = setInterval(() => {
                 for (let i = 0; i < 20; i++) {
@@ -590,11 +569,9 @@ this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)]
         }
 
         function createConfetti() {
-            // Burst from center
             for (let i = 0; i < 100; i++) {
                 particles.push(new Spark(window.innerWidth / 2, window.innerHeight / 2, 'confetti'));
             }
-            // Rain from top
             let rainDuration = 0;
             const rainInterval = setInterval(() => {
                 particles.push(new Spark(Math.random() * window.innerWidth, -10, 'confetti'));
@@ -602,7 +579,6 @@ this.color = confettiPalette[Math.floor(Math.random() * confettiPalette.length)]
                 if (rainDuration > 50) clearInterval(rainInterval);
             }, 50);
         }
-
     </script>
 </body>
 </html>
