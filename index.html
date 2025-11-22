@@ -5,6 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday AQ!</title>
+
+<!-- Google Fonts: Stalinist One -->
+    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
+
     <style>
         /* --- RESET & LAYOUT --- */
         body {
@@ -386,8 +390,11 @@
 
     <canvas id="fxCanvas"></canvas>
 
-    <div class="container">
-        <h1 class="title">HAPPY BIRTHDAY FINE BOY QUE!!!</h1>
+   <div class="container">
+        <div class="title-container">
+            <span class="title-line">HAPPY BIRTHDAY</span>
+            <span class="title-line">FINE BOY <span class="big-q">Q</span>UE!!!</span>
+        </div>
 
         <div class="cake-container">
             
@@ -460,7 +467,7 @@
 
     <script>
         // --- CONFIGURATION ---
-        const BLOW_THRESHOLD = 90; // Sensitivity
+        const BLOW_THRESHOLD = 110; // Sensitivity
         const FLAMES = document.querySelectorAll('.flame');
         const START_BTN = document.getElementById('startBtn');
         const STATUS_TEXT = document.getElementById('statusText');
