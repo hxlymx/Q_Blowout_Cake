@@ -285,7 +285,7 @@
 
     <script>
         // --- CONFIGURATION ---
-        const BLOW_THRESHOLD = 120; // Sensitivity
+        const BLOW_THRESHOLD = 150; // Sensitivity
         const FLAMES = document.querySelectorAll('.flame');
         const START_BTN = document.getElementById('startBtn');
         const MESSAGE = document.getElementById('message'); 
@@ -381,7 +381,7 @@
             // Extinguish Flames
             FLAMES.forEach(f => {
                 f.style.animation = 'none'; 
-                f.style.transition = 'all 0.5s'; 
+                f.style.transition = 'all 0.8s'; 
                 f.style.opacity = '0';
                 f.style.transform = 'translateX(-50%) scale(0)';
             });
