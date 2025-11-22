@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -78,14 +80,14 @@
 
         /* --- CANDLES --- */
         .candles-container {
-            position: absolute;
-            top: 20px; /* Positioned relative to top of cake container */
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 15;
-            display: flex;
-            gap: 15px;
-        }
+    position: absolute;
+    top: 20px; /* adjust as needed */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 15; /* whole candle group above cake */
+}
 
         .candle-letter {
             position: relative;
@@ -238,11 +240,21 @@
         <div class="cake-container">
             <!-- IMAGE REPLACES CSS CAKE --><img src="https://png.pngtree.com/png-vector/20241219/ourmid/pngtree-chocolate-cake-with-dripping-caramel-glaze-and-lit-candles-perfect-for-png-image_14823283.png" alt="Chocolate Cake" class="cake-image">
             
-            <!-- CANDLES OVERLAY --><div class="candles-container">
-                <div class="candle-letter">A<!-- FLAME inside letter --><div class="flame" id="flame1"></div></div>
-                <div class="candle-letter">Q<!-- FLAME inside letter --><div class="flame" id="flame2"></div></div>
-            </div>
+            <!-- CANDLES OVERLAY -->
+<div class="candles-container">
+    <div class="candle">
+        <div class="stick"></div>
+        <div class="candle-letter">A
+            <div class="flame" id="flame1"></div>
         </div>
+    </div>
+    <div class="candle">
+        <div class="stick"></div>
+        <div class="candle-letter">Q
+            <div class="flame" id="flame2"></div>
+        </div>
+    </div>
+</div>
 
         <!-- Removed the .instructions paragraph --><button id="startBtn">Enable Mic To Blowout Candles</button>
 
