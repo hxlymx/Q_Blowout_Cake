@@ -5,7 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday AQ!</title>
 
-    <!-- Google Fonts: Stalinist One --><link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
+    
+<link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
 
     <style>
         /* --- RESET & LAYOUT --- */
@@ -36,7 +37,7 @@
         /* --- TEXT STYLES --- */
         .title {
             position: absolute;
-            top: 2%;
+            top: 2%; /* Moved higher */
             width: 100%;
             text-align: center;
             
@@ -58,14 +59,17 @@
         /* --- CAKE CONTAINER (IMAGE BASED) --- */
         .cake-container {
             position: relative;
-            width: 320px; /* Adjust to fit image size */
+            width: 320px; 
             height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            margin-top: 100px; /* Moved down to avoid title overlap */
-            filter: drop_shadow(0 20px 30px rgba(0,0,0,0.8));
+            
+            /* Ensures cake is far below the title */
+            margin-top: 180px; /* Adjusted higher to prevent title overlap */
+            
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
         }
 
         .cake-image {
@@ -73,23 +77,36 @@
             height: auto;
             display: block;
             position: relative;
-            z-index: 5; /* Behind candles */
+            z-index: 5; 
         }
 
         /* --- CANDLES --- */
         .candles-container {
-    position: absolute;
-    top: 20px; /* adjust as needed */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 15px;
-    z-index: 15; /* whole candle group above cake */
-}
+            position: absolute;
+            /* Adjusted to push the entire group down onto the cake surface */
+            top: 5px; 
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 15;
+            display: flex;
+            gap: 30px; 
+        }
 
-        .candle-letter {
+        .candle-wrapper {
             position: relative;
-            font-size: 50px;
+            display: flex;
+            justify-content: center;
+            /* Set a fixed height that accommodates the letter and the stick */
+            height: 100px; 
+            width: 60px;
+        }
+
+        /* The Letter (In Front) */
+        .candle-letter {
+            position: absolute; /* positioned relative to wrapper */
+            /* This is the default position. A specific inline style will override this for 'A' */
+            top: 15px; 
+            font-size: 55px;
             font-weight: 900;
             /* Metallic Gold */
             background: radial-gradient(ellipse at center, #fcf6ba 0%, #bf953f 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
@@ -98,20 +115,18 @@
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 0px rgba(139, 101, 8, 0.8));
             animation: glitter 3s ease infinite;
-            z-index: 5; /* Ensure letter is in front/above of its stick */
+            z-index: 10; /* HIGHER THAN STICK */
         }
 
-        /* Sticks */
-        .candle-letter::after {
-            content: '';
+        /* The Stick (Behind) */
+        .stick {
             position: absolute;
-            bottom: -10px; /* Extend stick down */
-            left: 50%;
-            transform: translateX(-50%);
-            width: 5px;
-            height: 40px; /* Stick length */
-            background: #eee;
-            z-index: 0; /* Ensure stick is behind BELOW the letter, ABOVE cake */
+            /* Adjusted to start below the letter (55px height + 15px offset = 70px) */
+            top: 70px; 
+            width: 6px;
+            height: 25px; /* Shortened stick length to not stick out too much */
+            background: #8B4513; /* Brown */
+            z-index: 1; /* LOWER THAN LETTER */
             border-radius: 2px;
             box-shadow: inset -1px 0 2px rgba(0,0,0,0.2);
         }
@@ -119,7 +134,7 @@
         /* --- FLAMES --- */
         .flame {
             position: absolute;
-            top: -25px;
+            top: -30px;
             left: 50%;
             transform: translateX(-50%) scale(1);
             width: 24px;
@@ -131,9 +146,8 @@
             animation: flicker 0.1s infinite alternate;
             transform-origin: center bottom;
             transition: opacity 0.5s, transform 0.5s;
-            
-            /* START HIDDEN (Waiting for button press) */
             opacity: 0; 
+            z-index: 11; 
         }
 
         .flame::before {
@@ -162,14 +176,9 @@
             100% { background-position: 0% 50%; }
         }
 
-        @keyframes pulse {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
-        }
-
         /* --- UI --- */
         #startBtn {
-            margin-top: 40px;
+            margin-top: 30px;
             padding: 14px 32px;
             font-size: 18px;
             font-weight: bold;
@@ -236,25 +245,27 @@
         <h1 class="title">HAPPY BIRTHDAY<br>FINE BOY <span class="big-q">Q</span>UE!!!</h1>
 
         <div class="cake-container">
-            <!-- IMAGE REPLACES CSS CAKE --><img src="https://png.pngtree.com/png-vector/20241219/ourmid/pngtree-chocolate-cake-with-dripping-caramel-glaze-and-lit-candles-perfect-for-png-image_14823283.png" alt="Chocolate Cake" class="cake-image">
+            <!-- Cake Image --><img src="https://png.pngtree.com/png-vector/20241219/ourmid/pngtree-chocolate-cake-with-dripping-caramel-glaze-and-lit-candles-perfect-for-png-image_14823283.png" alt="Chocolate Cake" class="cake-image">
             
-            <!-- CANDLES OVERLAY -->
-<div class="candles-container">
-    <div class="candle">
-        <div class="stick"></div>
-        <div class="candle-letter">A
-            <div class="flame" id="flame1"></div>
+            <!-- CANDLES OVERLAY (Corrected Structure for Z-Index) --><div class="candles-container">
+                <div class="candle-wrapper">
+                    <!-- Stick is first, with z-index: 1 --><div class="stick"></div>
+                    <!-- Letter A: Increased top offset to align with stick -->
+                    <div class="candle-letter" style="top: 20px;">A 
+                        <div class="flame" id="flame1"></div>
+                    </div>
+                </div>
+                <div class="candle-wrapper">
+                    <div class="stick"></div>
+                    <!-- Letter Q: Uses the default 15px offset from the CSS class -->
+                    <div class="candle-letter">Q
+                        <div class="flame" id="flame2"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="candle">
-        <div class="stick"></div>
-        <div class="candle-letter">Q
-            <div class="flame" id="flame2"></div>
-        </div>
-    </div>
-</div>
 
-        <!-- Removed the .instructions paragraph --><button id="startBtn">Enable Mic To Blowout Candles</button>
+        <button id="startBtn">Enable Mic To Blowout Candles</button>
 
         <div id="message">
             <h2>Wishing You The Sweetest Birthday Ever!!! <span class="small-heart">♡</span></h2>
@@ -307,13 +318,24 @@
                 loop();
 
             } catch (err) {
-                alert("Microphone access denied. Tap the cake to blow out!");
+                // Using a custom message box instead of alert()
+                const errorMessage = document.createElement('div');
+                errorMessage.style.cssText = `
+                    position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                    background: #ff4d4d; color: white; padding: 20px; border-radius: 10px; 
+                    box-shadow: 0 5px 15px rgba(0,0,0,0.5); z-index: 9999; text-align: center;
+                `;
+                errorMessage.innerHTML = '<h3>Microphone Access Denied</h3><p>Tap the cake to blow out!</p>';
+                document.body.appendChild(errorMessage);
+                
                 document.querySelector('.cake-container').addEventListener('click', blowOut);
                 START_BTN.style.display = 'none';
                 FLAMES.forEach(f => {
                     f.style.opacity = '1';
                     f.style.animation = 'flicker 0.1s infinite alternate';
                 });
+
+                setTimeout(() => errorMessage.remove(), 4000); // Remove message after 4 seconds
             }
         });
 
