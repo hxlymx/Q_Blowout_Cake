@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>HAPPY BIRTHDAY QANI!!!</title>
+    <title>Happy Birthday AQ!</title>
     <style>
         /* --- RESET & LAYOUT --- */
         body {
@@ -186,24 +184,31 @@
 
         /* --- SPRINKLES (Browns & Golds) --- */
         .sprinkles {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 6;
-            border-radius: 50% / 10%;
-            overflow: hidden;
-        }
+    position: absolute;
+    top: 15px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    pointer-events: none;
+    overflow: visible;
+}
 
-        .sprinkles::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 4px;
-            border-radius: 50%;
+.sprinkle {
+    position: absolute;
+    width: 6px;
+    height: 2px;
+    border-radius: 2px;
+    transform: rotate(calc(var(--r) * 1deg));
+    background: var(--c);
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+    opacity: 0.9;
+    animation: sprinkleShimmer 3s infinite alternate;
+}
+
+@keyframes sprinkleShimmer {
+    0% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
             /* Palette: Browns and Gold sparkles */
             box-shadow: 
                 20px 40px 0 #8B4513, 50px 50px 0 #D2691E, 80px 30px 1px #FFD700,
@@ -223,7 +228,7 @@
         /* --- CANDLES --- */
         .candles-container {
             position: absolute;
-            bottom: 35px; 
+            bottom: 95px; 
             left: 50%;
             transform: translateX(-50%);
             z-index: 15;
@@ -264,11 +269,11 @@
             top: -20px;
             left: 50%;
             transform: translateX(-50%) scale(1);
-            width: 16px;
-            height: 24px;
+            width: 24px;
+            height: 34px;
             background: radial-gradient(circle at 50% 80%, #e0b0ff, #9a4ecc 40%, #5e1e85 100%);
             border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
-            box-shadow: 0 0 15px 4px rgba(154, 78, 204, 0.8);
+            box-shadow: 0 0 25px 6px rgba(154, 78, 204, 0.9);
             filter: blur(0.5px);
             animation: flicker 0.1s infinite alternate;
             transform-origin: center bottom;
@@ -344,11 +349,11 @@
         }
 
         #message h2 {
-            font-size: 50px;
+            font-size: 40px;
             margin: 0;
             line-height: 1.2;
             /* FONT CHANGE APPLIED HERE */
-            font-family: mily: 'Brush Script MT', cursive;
+            font-family: 'Brush Script MT', cursive;
             
             /* Metallic Purple Text */
             background: linear-gradient(to bottom, #E0B0FF 0%, #9932CC 50%, #4B0082 100%);
@@ -393,6 +398,12 @@
                 </div>
                 <!-- Realistic Icing Structure -->
                 <div class="icing-layer">
+	 	  <div class="sprinkles">
+    	 	 	 <div class="sprinkle" style="top:10px; left:40px; --r:20; --c:#FFD700;"></div>
+    	 	 	 <div class="sprinkle" style="top:15px; left:70px; --r:-10; --c:#B8860B;"></div>
+    	 	 	 <div class="sprinkle" style="top:5px; left:110px; --r:30; --c:#E6C200;"></div>
+   	 	 	  <div class="sprinkle" style="top:20px; left:150px; --r:-25; --c:#8B4513;"></div>
+	 	 </div>
                     <div class="icing-cap"></div>
                     <div class="drips">
                         <div class="drip long"></div>
@@ -445,11 +456,10 @@
         </div>
 
         <p class="instructions" id="statusText">Press button to light candles</p>
-        <button id="startBtn">Enable Mic to Blow Candles</button>
+        <button id="startBtn">Enable Mic To Blowout Candles</button>
 
         <div id="message">
-            <h2> Wishing you the sweetest birthday ever!!! &#9825; </h2>
-            
+            <h2>Wishing You The Sweetest Birthday Ever!!! <span class="small-heart">♡</span></h2>
         </div>
     </div>
 
