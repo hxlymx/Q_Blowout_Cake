@@ -235,7 +235,18 @@
             filter: drop-shadow(0px 1px 0px rgba(51,0,51,0.5));
             letter-spacing: 2px;
         }
-        
+
+        /* Signature Style */
+        #signature {
+            display: block;
+            margin-top: 10px;
+            font-size: clamp(16px, 4vw, 24px); /* Smaller size than h2 */
+            font-style: italic;
+            font-family: 'Brush Script MT', cursive; /* Reusing the cursive font */
+            color: #660066; /* Dark Purp color */
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.7);
+        }
+
         #fxCanvas {
             position: fixed;
             top: 0;
@@ -280,6 +291,7 @@
 
         <div id="message">
             <h2>Wishing You The Sweetest Year! <br>May All Your Prayers & Wishes Come True! <span class="small-heart">♡</span></h2>
+            <span id="signature">-Love Haleems</span>
         </div>
     </div>
 
