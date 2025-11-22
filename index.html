@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Happy Birthday AQ!</title>
 
-<!-- Google Fonts: Stalinist One -->
-    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
+    <!-- Google Fonts: Stalinist One --><link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
 
     <style>
         /* --- RESET & LAYOUT --- */
         body {
-            /* Darker, moodier background to make the cake pop */
             background: radial-gradient(circle at center, #1a100c 0%, #000000 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
@@ -39,10 +36,14 @@
         /* --- TEXT STYLES --- */
         .title {
             position: absolute;
-            top: 5%;
-            font-size: clamp(24px, 5vw, 40px);
+            top: 2%;
+            width: 100%;
             text-align: center;
-            font-weight: 800;
+            
+            font-family: 'Stalinist One', cursive;
+            font-size: clamp(24px, 5vw, 40px);
+            line-height: 1.4;
+            
             background: linear-gradient(to right, #d4af37, #fdf5c4, #d4af37);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -50,190 +51,35 @@
             z-index: 20;
         }
 
-        .instructions {
-            margin-top: 20px;
-            color: #8d6e63;
-            font-size: 14px;
-            font-weight: 500;
-            animation: pulse 2s infinite;
+        .big-q {
+            font-size: 1.2em;
         }
 
-        /* --- THE REALISTIC CAKE --- */
+        /* --- CAKE CONTAINER (IMAGE BASED) --- */
         .cake-container {
             position: relative;
-            width: 300px;
-            height: 320px;
+            width: 320px; /* Adjust to fit image size */
+            height: auto;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            margin-top: 30px;
-            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
+            margin-top: 100px; /* Moved down to avoid title overlap */
+            filter: drop_shadow(0 20px 30px rgba(0,0,0,0.8));
         }
 
-        /* -- CAKE TEXTURE & SHAPE -- */
-        .tier {
+        .cake-image {
+            width: 100%;
+            height: auto;
+            display: block;
             position: relative;
-            /* Realistic Chocolate Sponge Gradient */
-            background: 
-                linear-gradient(to right, #3e2723, #5d4037 20%, #6d4c41 50%, #5d4037 80%, #3e2723),
-                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjZmZmIiBmaWxsLW9wYWNpdHk9IjAuMDUiLz4KPC9zdmc+'); /* Noise texture */
-            border-radius: 50% / 10%; /* Cylindrical perspective */
-            box-shadow: 
-                inset 0 -5px 10px rgba(0,0,0,0.5), /* Bottom shadow */
-                inset 0 5px 10px rgba(255,255,255,0.05); /* Top highlight */
-        }
-
-        /* The "Top" surface of the cylinder */
-        .tier::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 30px; 
-            background: radial-gradient(circle at 30% 30%, #6d4c41, #3e2723);
-            border-radius: 50%;
-            transform: translateY(-50%);
-            z-index: 1;
-            box-shadow: inset 0 2px 5px rgba(255,255,255,0.1);
-        }
-
-        /* Tier Dimensions */
-        .tier.bottom {
-            width: 280px;
-            height: 90px;
-            z-index: 10;
-        }
-
-        .tier.middle {
-            width: 210px;
-            height: 80px;
-            z-index: 20;
-            margin-bottom: -15px;
-        }
-
-        .tier.top {
-            width: 150px;
-            height: 70px;
-            z-index: 30;
-            margin-bottom: -15px;
-            display: flex;
-            justify-content: center;
-        }
-
-        /* --- REALISTIC DRIPPY ICING --- */
-        /* Container for drips */
-        .icing-layer {
-            position: absolute;
-            top: -15px; /* Pull up to cover the rim */
-            left: -2%;
-            width: 104%; /* Slightly wider than cake */
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            filter: drop-shadow(0 2px 2px rgba(0,0,0,0.4));
-        }
-
-        /* The smooth top cap of the icing */
-        .icing-cap {
-            position: absolute;
-            top: 0;
-            left: 2%; /* Re-center inside the widened container */
-            width: 96%;
-            height: 30px;
-            background: #2e1a12; /* Dark Ganache */
-            border-radius: 50%;
-            z-index: 2;
-            /* Glossy reflection */
-            background: radial-gradient(circle at 40% 20%, #5d4037 0%, #2e1a12 60%);
-        }
-
-        /* Individual Drips container */
-        .drips {
-            position: absolute;
-            top: 15px; /* Start below the cap center */
-            left: 2%;
-            width: 96%;
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            padding: 0 5px;
-            box-sizing: border-box;
-        }
-
-        /* The drip shapes */
-        .drip {
-            background: #2e1a12; /* Matches ganache */
-            width: 12px;
-            border-radius: 0 0 20px 20px;
-            box-shadow: inset 2px -2px 4px rgba(255,255,255,0.1);
-        }
-
-        /* Randomize Drip Heights using CSS classes */
-        .drip.long { height: 50px; width: 14px; }
-        .drip.med { height: 35px; width: 12px; }
-        .drip.short { height: 20px; width: 10px; }
-        .drip.wide { height: 40px; width: 18px; border-radius: 0 0 25px 25px; }
-        
-        /* Connect the drips with a "rim" so no gaps appear at top */
-        .drips::before {
-            content: '';
-            position: absolute;
-            top: -10px;
-            left: 0;
-            width: 100%;
-            height: 15px;
-            background: #2e1a12;
-        }
-
-        /* --- SPRINKLES (Browns & Golds) --- */
-        .sprinkles {
-    position: absolute;
-    top: 15px;
-    left: 0;
-    width: 100%;
-    height: 40px;
-    pointer-events: none;
-    overflow: visible;
-}
-
-.sprinkle {
-    position: absolute;
-    width: 6px;
-    height: 2px;
-    border-radius: 2px;
-    transform: rotate(calc(var(--r) * 1deg));
-    background: var(--c);
-    box-shadow: 0 0 4px rgba(0,0,0,0.3);
-    opacity: 0.9;
-    animation: sprinkleShimmer 3s infinite alternate;
-}
-
-@keyframes sprinkleShimmer {
-    0% { opacity: 0.7; }
-    100% { opacity: 1; }
-}
-            /* Palette: Browns and Gold sparkles */
-            box-shadow: 
-                20px 40px 0 #8B4513, 50px 50px 0 #D2691E, 80px 30px 1px #FFD700,
-                110px 60px 0 #A0522D, 140px 45px 0 #DAA520, 170px 35px 0 #8B4513,
-                30px 70px 1px #FFD700, 60px 80px 0 #D2691E, 90px 65px 0 #A0522D,
-                120px 75px 1px #FFD700, 200px 50px 0 #8B4513, 230px 60px 0 #DAA520;
-            opacity: 0.9;
-            /* Slow rotation to shimmer */
-            animation: shimmerSprinkles 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes shimmerSprinkles {
-            from { transform: translateY(0); }
-            to { transform: translateY(-2px); }
+            z-index: 5; /* Behind candles */
         }
 
         /* --- CANDLES --- */
         .candles-container {
             position: absolute;
-            bottom: 95px; 
+            top: 20px; /* Positioned relative to top of cake container */
             left: 50%;
             transform: translateX(-50%);
             z-index: 15;
@@ -245,25 +91,27 @@
             position: relative;
             font-size: 50px;
             font-weight: 900;
+            /* Metallic Gold */
             background: radial-gradient(ellipse at center, #fcf6ba 0%, #bf953f 25%, #b38728 50%, #fbf5b7 75%, #aa771c 100%);
             background-size: 200% 200%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             filter: drop-shadow(0 2px 0px rgba(139, 101, 8, 0.8));
             animation: glitter 3s ease infinite;
+            z-index: 5; /* Ensure letter is in front/above of its stick */
         }
 
         /* Sticks */
         .candle-letter::after {
             content: '';
             position: absolute;
-            bottom: -2px;
+            bottom: -10px; /* Extend stick down */
             left: 50%;
             transform: translateX(-50%);
-            width: 4px;
-            height: 15px;
+            width: 5px;
+            height: 50px; /* Stick length */
             background: #eee;
-            z-index: -1;
+            z-index: 1; /* Ensure stick is behind BELOW the letter, ABOVE cake */
             border-radius: 2px;
             box-shadow: inset -1px 0 2px rgba(0,0,0,0.2);
         }
@@ -271,7 +119,7 @@
         /* --- FLAMES --- */
         .flame {
             position: absolute;
-            top: -20px;
+            top: -25px;
             left: 50%;
             transform: translateX(-50%) scale(1);
             width: 24px;
@@ -283,6 +131,8 @@
             animation: flicker 0.1s infinite alternate;
             transform-origin: center bottom;
             transition: opacity 0.5s, transform 0.5s;
+            
+            /* START HIDDEN (Waiting for button press) */
             opacity: 0; 
         }
 
@@ -297,6 +147,7 @@
             background: #333;
         }
 
+        /* Animations */
         @keyframes flicker {
             0% { transform: translateX(-50%) scale(1) skewX(0deg); opacity: 1; }
             25% { transform: translateX(-50%) scale(1.1, 0.9) skewX(-2deg); opacity: 0.95; }
@@ -357,10 +208,7 @@
             font-size: 40px;
             margin: 0;
             line-height: 1.2;
-            /* FONT CHANGE APPLIED HERE */
             font-family: 'Brush Script MT', cursive;
-            
-            /* Metallic Purple Text */
             background: linear-gradient(to bottom, #E0B0FF 0%, #9932CC 50%, #4B0082 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -368,12 +216,6 @@
             letter-spacing: 2px;
         }
         
-        #message p {
-            font-size: 22px;
-            margin-top: 15px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-        }
-
         #fxCanvas {
             position: fixed;
             top: 0;
@@ -390,75 +232,19 @@
 
     <canvas id="fxCanvas"></canvas>
 
-   <div class="container">
-        <div class="title-container">
-            <span class="title-line">HAPPY BIRTHDAY</span>
-            <span class="title-line">FINE BOY <span class="big-q">Q</span>UE!!!</span>
-        </div>
+    <div class="container">
+        <h1 class="title">HAPPY BIRTHDAY<br>FINE BOY <span class="big-q">Q</span>UE!!!</h1>
 
         <div class="cake-container">
+            <!-- IMAGE REPLACES CSS CAKE --><img src="https://png.pngtree.com/png-vector/20241219/ourmid/pngtree-chocolate-cake-with-dripping-caramel-glaze-and-lit-candles-perfect-for-png-image_14823283.png" alt="Chocolate Cake" class="cake-image">
             
-            <!-- TOP TIER -->
-            <div class="tier top">
-                <div class="candles-container">
-                    <div class="candle-letter">A<div class="flame" id="flame1"></div></div>
-                    <div class="candle-letter">Q<div class="flame" id="flame2"></div></div>
-                </div>
-                <!-- Realistic Icing Structure -->
-                <div class="icing-layer">
-                    <div class="icing-cap"></div>
-                    <div class="drips">
-                        <div class="drip long"></div>
-                        <div class="drip short"></div>
-                        <div class="drip med"></div>
-                        <div class="drip long"></div>
-                        <div class="drip short"></div>
-                        <div class="drip med"></div>
-                        <div class="drip wide"></div>
-                    </div>
-                </div>
-                <div class="sprinkles"></div>
-            </div>
-
-            <!-- MIDDLE TIER -->
-            <div class="tier middle">
-                <div class="icing-layer">
-                    <div class="icing-cap"></div>
-                    <div class="drips">
-                        <div class="drip med"></div>
-                        <div class="drip wide"></div>
-                        <div class="drip short"></div>
-                        <div class="drip long"></div>
-                        <div class="drip short"></div>
-                        <div class="drip med"></div>
-                        <div class="drip long"></div>
-                        <div class="drip short"></div>
-                    </div>
-                </div>
-                <div class="sprinkles"></div>
-            </div>
-
-            <!-- BOTTOM TIER -->
-            <div class="tier bottom">
-                <div class="icing-layer">
-                    <div class="icing-cap"></div>
-                    <div class="drips">
-                        <div class="drip short"></div>
-                        <div class="drip med"></div>
-                        <div class="drip long"></div>
-                        <div class="drip wide"></div>
-                        <div class="drip short"></div>
-                        <div class="drip long"></div>
-                        <div class="drip med"></div>
-                        <div class="drip short"></div>
-                        <div class="drip med"></div>
-                    </div>
-                </div>
+            <!-- CANDLES OVERLAY --><div class="candles-container">
+                <div class="candle-letter">A<!-- FLAME inside letter --><div class="flame" id="flame1"></div></div>
+                <div class="candle-letter">Q<!-- FLAME inside letter --><div class="flame" id="flame2"></div></div>
             </div>
         </div>
 
-        <p class="instructions" id="statusText">Press button to light candles</p>
-        <button id="startBtn">Enable Mic To Blowout Candles</button>
+        <!-- Removed the .instructions paragraph --><button id="startBtn">Enable Mic To Blowout Candles</button>
 
         <div id="message">
             <h2>Wishing You The Sweetest Birthday Ever!!! <span class="small-heart">♡</span></h2>
@@ -470,8 +256,7 @@
         const BLOW_THRESHOLD = 110; // Sensitivity
         const FLAMES = document.querySelectorAll('.flame');
         const START_BTN = document.getElementById('startBtn');
-        const STATUS_TEXT = document.getElementById('statusText');
-        const MESSAGE = document.getElementById('message');
+        const MESSAGE = document.getElementById('message'); 
         
         let audioContext, analyser, dataArray;
         let isListening = false;
@@ -488,6 +273,7 @@
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
 
+        // --- CANDLE LIGHTING LOGIC PRESERVED ---
         START_BTN.addEventListener('click', async () => {
             try {
                 const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
@@ -499,16 +285,13 @@
                 dataArray = new Uint8Array(analyser.frequencyBinCount);
 
                 START_BTN.style.display = 'none';
-                STATUS_TEXT.textContent = "Blow into your microphone to make a wish!";
-                
+
+                // Turn flames ON visually
                 FLAMES.forEach(f => {
-                    f.style.opacity = '1';              // appear
+                    f.style.opacity = '1';              
                     f.style.transform = 'translateX(-50%) scale(1)';
-                    // Re-enable animation in case it was stopped
                     f.style.animation = 'flicker 0.12s infinite alternate';
                 });
-
-STATUS_TEXT.textContent = "Blow into the microphone to make a wish!";
 
                 isListening = true;
                 loop();
@@ -517,7 +300,6 @@ STATUS_TEXT.textContent = "Blow into the microphone to make a wish!";
                 alert("Microphone access denied. Tap the cake to blow out!");
                 document.querySelector('.cake-container').addEventListener('click', blowOut);
                 START_BTN.style.display = 'none';
-                STATUS_TEXT.textContent = "Tap the cake to make a wish!";
                 FLAMES.forEach(f => {
                     f.style.opacity = '1';
                     f.style.animation = 'flicker 0.1s infinite alternate';
@@ -561,8 +343,6 @@ STATUS_TEXT.textContent = "Blow into the microphone to make a wish!";
                 f.style.transform = 'translateX(-50%) scale(0)';
             });
 
-            STATUS_TEXT.style.opacity = '0';
-
             setTimeout(() => {
                 MESSAGE.classList.add('show');
                 createSparklers(); 
@@ -570,6 +350,7 @@ STATUS_TEXT.textContent = "Blow into the microphone to make a wish!";
             }, 200);
         }
 
+        // --- FX PARTICLES ---
         class Spark {
             constructor(x, y, type) {
                 this.x = x;
