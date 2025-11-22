@@ -19,7 +19,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow: hidden; /* Prevents scrollbar */
             color: white;
         }
 
@@ -42,7 +42,7 @@
             text-align: center;
             
             font-family: 'Stalinist One', cursive;
-            font-size: clamp(28px, 6vw, 46px);
+            font-size: clamp(28px, 5vw, 44px);
             line-height: 1.6;
             
             background: linear-gradient(to right, #d4af37, #fdf5c4, #d4af37);
@@ -66,8 +66,8 @@
             align-items: center;
             justify-content: flex-end;
             
-            /* Ensures cake is far below the title */
-            margin-top: 180px; /* Adjusted higher to prevent title overlap */
+            /* ADJUSTMENT 1: Reduced margin-top to move the cake higher up and save vertical space */
+            margin-top: 100px; 
             
             filter: drop-shadow(0 20px 30px rgba(0,0,0,0.8));
         }
@@ -104,7 +104,7 @@
         /* The Letter (In Front) */
         .candle-letter {
             position: absolute; /* positioned relative to wrapper */
-            /* This is the default position. A specific inline style will override this for 'A' */
+            /* Default position for Q */
             top: 15px; 
             font-size: 55px;
             font-weight: 900;
@@ -178,7 +178,8 @@
 
         /* --- UI --- */
         #startBtn {
-            margin-top: 30px;
+            /* ADJUSTMENT 1: Reduced margin-top to ensure the button is not cut off */
+            margin-top: 20px; 
             padding: 14px 32px;
             font-size: 18px;
             font-weight: bold;
@@ -206,7 +207,16 @@
             z-index: 100;
             pointer-events: none;
             transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.27);
-            width: 100%;
+            width: 90%; /* Use 90% width for better mobile fit */
+
+            /* ADJUSTMENT 2: Frosted Glass / Glow effect for better contrast */
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px); 
+            padding: 20px 30px;
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(224, 176, 255, 0.6), inset 0 0 10px rgba(255, 255, 255, 0.3); /* Purple glow */
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         #message.show {
@@ -214,14 +224,14 @@
         }
 
         #message h2 {
-            font-size: 40px;
+            font-size: clamp(26px, 6vw, 42px);
             margin: 0;
             line-height: 1.2;
             font-family: 'Brush Script MT', cursive;
-            background: linear-gradient(to bottom, #E0B0FF 0%, #9932CC 50%, #4B0082 100%);
+            background: linear-gradient(to bottom, #E0B0FF 0%, #9932CC 50%, #BF66FF 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 2px 0px rgba(255,255,255,0.3));
+            filter: drop-shadow(0px 2px 0px rgba(235,218,0,0.3));
             letter-spacing: 2px;
         }
         
@@ -251,7 +261,7 @@
                 <div class="candle-wrapper">
                     <!-- Stick is first, with z-index: 1 --><div class="stick"></div>
                     <!-- Letter A: Increased top offset to align with stick -->
-                    <div class="candle-letter" style="top: 18px;">A 
+                    <div class="candle-letter" style="top: 25px;">A 
                         <div class="flame" id="flame1"></div>
                     </div>
                 </div>
